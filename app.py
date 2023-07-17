@@ -1,9 +1,9 @@
 from dash import Dash, html, dcc, dash_table
 import pandas as pd
-import string
 import warnings
 warnings.filterwarnings('ignore')
 import requests
+from datetime import datetime
 
 
 
@@ -115,9 +115,10 @@ app = Dash(__name__)
 
 app.layout = html.Div ([
     html.Label('NÃO É UMA RECOMENDAÇÃO DE COMPRA'),
+    html.Label(' Data:{data}'.format(data = datetime.today().strftime('%d-%m-%Y'))),
     dash_table.DataTable(
         id = 'tabela',
-        data = top20.to_dict('record'), 
+        data = top20.to_dict('records'), 
         columns= [{"name": i, "id": i} for i in top20.columns],
     ),
 ])
